@@ -1,6 +1,7 @@
 import math
 from Main import coerce
 import os
+import random
 
 
 def rnd(n, nPlaces=3):
@@ -51,3 +52,7 @@ def cosine(a, b, c):
     x2 = max(0, min(1, x1))
     y = math.sqrt(a ** 2 - x2 ** 2)
     return x2, y
+
+
+def many(t, n):
+    return random.choices(t, k=n)
