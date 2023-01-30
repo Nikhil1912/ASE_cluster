@@ -29,7 +29,7 @@ class Data:
         map(t, self.add)
         return data
 
-    def stats(self, cols, nPlaces, what='mid'):
+    def stats(self, cols, nPlaces, what='mid'):     # No default for cols?
         def fun(k, col):
             return col.rnd(getattr(col, what)(), nPlaces), col.txt
 
