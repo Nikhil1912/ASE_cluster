@@ -70,6 +70,16 @@ def eg_stats(the):
     temp = {}
     temp.update({"y": data.cols.y, "x": data.cols.x})
     for k, cols in temp.items():
-        print(k, "mid", data.stats(cols, 2, "mid"))
-        print("", "div", data.stats(cols, 2, "div"))
+        print(k, "mid", data.stats(2, cols, "mid"))
+        print("", "div", data.stats(2, cols, "div"))
+
+def eg_around(the):
+    data = Data(the['file'],the)
+    print(0,0,data.rows[1].cells)
+    for n,t in enumerate(data.around(data.rows[1])):
+
+        if n%50 == 0:
+            #print(t)
+            print(n,rnd(t['dist'],2),t['row'].cells)
+    pass
 

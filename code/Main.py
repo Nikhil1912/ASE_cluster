@@ -1,12 +1,17 @@
 """
-data.lua : an example csv reader script
+cluster.lua : an example csv reader script
 
+USAGE: cluster.lua  [OPTIONS] [-g ACTION]
 OPTIONS:
-  -d  --dump  on crash, dump stack = False
-  -f  --file  name of file         = ../etc/data/auto93.csv
-  -g  --go    start-up action      = data
-  -h  --help  show help            = False
-  -s  --seed  random number seed   = 937162211
+  -d  --dump    on crash, dump stack   = False
+  -f  --file    name of file           = ../etc/data/auto93.csv
+  -F  --Far     distance to "faraway"  = .95
+  -g  --go      start-up action        = data
+  -h  --help    show help              = False
+  -m  --min     stop clusters at N^min = .5
+  -p  --p       distance coefficient   = 2
+  -s  --seed    random number seed     = 937162211
+  -S  --Sample  sampling data size     = 512
 ACTIONS:
 """
 import getopt
