@@ -23,13 +23,14 @@ class Data:
         else:
             if type(t) == list:
                 t = Row(t)
-                self.cols.add(t)
-                self.rows.append(t)
+            #print(t)
+            self.cols.add(t)
+            self.rows.append(t)
 
-    def clone(self, t, data):
+    def clone(self, t={}):
         """Creates clone"""
-        data = Data(list(self.cols.names))
-        mp(t, self.add)
+        data = Data([self.cols.names])
+        mp(t,data.add)
         return data
 
     def stats(self, nPlaces, cols=None,what='mid'):
