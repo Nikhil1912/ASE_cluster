@@ -4,7 +4,7 @@ import TestEngine
 from Sym import Sym
 from Num import Num
 from Data import Data
-from Utils import rnd, csv, rand
+from Utils import rnd, csv, rand, show
 
 tot = 0
 
@@ -82,4 +82,18 @@ def eg_around(the):
             #print(t)
             print(n,rnd(t['dist'],2),t['row'].cells)
     pass
+
+def eg_half(the):
+    data=Data(the["file"])
+    left,right,A,B,mid,c=data.half()
+    print(len(left),len(right),len(data.rows))
+    print(A.cells,c)
+    print(mid.cells)
+    print(B.cells)
+
+def eg_optimize(the):
+    data=Data(the["file"])
+    show(data.sway(),"mid",data.cols.y,1)
+
+
 
