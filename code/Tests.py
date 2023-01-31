@@ -84,7 +84,7 @@ def eg_around(the):
     pass
 
 def eg_half(the):
-    data=Data(the["file"])
+    data=Data(the["file"],the)
     left,right,A,B,mid,c=data.half()
     print(len(left),len(right),len(data.rows))
     print(A.cells,c)
@@ -92,5 +92,5 @@ def eg_half(the):
     print(B.cells)
 
 def eg_optimize(the):
-    data=Data(the["file"])
+    data=Data(the["file"],the)
     show(data.sway(),"mid",data.cols.y,1)

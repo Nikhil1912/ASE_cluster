@@ -1,5 +1,6 @@
 from Utils import csv, kap
-from Utils import cosine,many,map,any as mp
+from Utils import cosine,many,any
+from Utils import map as mp
 from Row import Row
 from Cols import Cols
 import math
@@ -54,7 +55,7 @@ class Data:
     def better(self,row1,row2,s1=0,s2=0,ys=None,x=0,y=0):
         if not ys:
             ys = self.cols.y
-        for cols in ys:
+        for col in ys:
             x = col.norm(row1.cells[col.at])
             y = col.norm(row2.cells[col.at])
             s1 = s1 - math.exp(col.w*(x-y)/len(ys))
@@ -70,22 +71,23 @@ class Data:
             return {'row':row2,'dist':self.dist(row1,row2,cols)}
         return sorted(list(map(fun,rows)),key=lambda x:x['dist'])
 
-    def half(self,rows,cols=None,above=None):
+    def half(self,rows=None,cols=None,above=None):
         if not rows:
             rows=self.rows
+       
         some = many(rows,self.the["Sample"])
         A=above
+        if not above:
+            A=any(some)
         B=self.around(A,some)[int(self.the["Far"] * len(rows))//1]["row"]
+        def dist(row1,row2):
+            return self.dist(row1,row2,cols)
         c=dist(A,B)
         left=[]
         right=[]
-        if not above:
-            A=any(some)
-        def dist(row1,row2):
-            return self.dist(row1,row2,cols)
         def project(row):
             return {"row":row, "dist":cosine(dist(row,A), dist(row,B), c)}
-        for n,tmp in enumerate(sorted(list(map(rows,project)),key=lambda x:x["dist"])):
+        for n,tmp in enumerate(sorted(list(map(project,rows)),key=lambda x:x["dist"])):
             if n <=len(rows)//2:
                 left.append(tmp["row"])
                 mid=tmp["row"]
@@ -97,7 +99,7 @@ class Data:
         if not rows:
             rows=self.rows
         if not min:
-            min=len(rows)^self.the.min
+            min=len(rows)**self.the["min"]
         if not cols:
             cols=self.cols.x
         node={"data":self.clone(rows)}
@@ -105,7 +107,7 @@ class Data:
             left, right, node["A"], node["B"], node["mid"],_ = self.half(rows,cols,above)
             if self.better(node["B"],node["A"]):
                 left,right,node["A"],node["B"] = right,left,node["B"],node["A"]
-            node.left  = self.sway(left,  min, cols, node["A"])
+            node["left"]  = self.sway(left,  min, cols, node["A"])
         return node
 
 

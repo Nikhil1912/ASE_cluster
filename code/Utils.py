@@ -49,9 +49,11 @@ def kap(t, fun, u={}):
 
 
 def cosine(a, b, c):
+    if c==0:
+        c=0.5
     x1 = (a ** 2 + c ** 2 - b ** 2) / (2 * c)
     x2 = max(0, min(1, x1))
-    y = math.sqrt(a ** 2 - x2 ** 2)
+    y = math.sqrt(abs(a ** 2 - x2 ** 2))
     return x2, y
 
 
@@ -59,17 +61,18 @@ def many(t, n):
     return random.choices(t, k=n)
 
 def any(t):
-    return random.choices(t)
+    return random.choices(t)[0]
 
 def show(node,what,cols,nPlaces,lvl=0):
     if node:
-        print("| "*lvl+str(len(node["data"].rows))) 
-        if not node["left"] or lvl==0:
-            print(node["data"].stats("mid",node["data"].cols.y,nPlaces))
+        print("| "*lvl+str(len(node["data"].rows))+" ",end='') 
+        #print(node)
+        if "left" not in node or lvl==0:
+            print(node["data"].stats(nPlaces,node["data"].cols.y,"mid"))
         else:
             print("")
-        show(node["left"], what,cols, nPlaces, lvl+1)
-        show(node["right"], what,cols,nPlaces, lvl+1)
+        show(None if "left" not in node  else node["left"], what,cols, nPlaces, lvl+1)
+        show(None if "right" not in node  else node["right"], what,cols,nPlaces, lvl+1)
 
     
 
