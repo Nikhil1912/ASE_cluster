@@ -33,6 +33,7 @@ def csv(src, fun):
 
 def map(src, fun):
     for i in src:
+        #print(i)
         fun(i)
 
 
