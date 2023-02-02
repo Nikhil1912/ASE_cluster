@@ -57,11 +57,13 @@ def cosine(a, b, c):
     return x2, y
 
 
-def many(t, n):
+def many(t, n, seed=937162211):
+    random.seed(seed)
     return random.choices(t, k=n)
 
 
-def any(t):
+def any(t, seed=937162211):
+    random.seed(seed)
     return random.choices(t)[0]
 
 
@@ -75,15 +77,3 @@ def show(node, what, cols, nPlaces, lvl=0):
             print("")
         show(None if "left" not in node else node["left"], what, cols, nPlaces, lvl + 1)
         show(None if "right" not in node else node["right"], what, cols, nPlaces, lvl + 1)
-
-
-"""
-function show(node,what,cols,nPlaces,    lvl) --> nil; prints the tree generated from `DATA:tree`.
-  if node then
-    lvl = lvl or 0
-    io.write(("| "):rep(lvl)..#node.data.rows.."  ")
-    print((not node.left or lvl==0) and  o(node.data:stats("mid",node.data.cols.y,nPlaces)) or "")
-    show(node.left, what,cols, nPlaces, lvl+1)
-    show(node.right, what,cols,nPlaces, lvl+1) end end
-
-"""

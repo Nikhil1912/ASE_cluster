@@ -79,10 +79,10 @@ class Data:
         if not rows:
             rows = self.rows
 
-        some = many(rows, self.the["Sample"])
+        some = many(rows, self.the["Sample"], self.the['seed'])
         A = above
         if not above:
-            A = any(some)
+            A = any(some, self.the['seed'])
         B = self.around(A, some)[int(self.the["Far"] * len(rows)) // 1]["row"]
 
         def dist(row1, row2):
